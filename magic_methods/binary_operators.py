@@ -29,11 +29,19 @@ class NumberTuple:
         result = tuple(x // y for x, y in zip(self.numbers, other.numbers))
         return NumberTuple(*result)
 
+
+class Number:
+    def __init__(self, *args, **kwargs):
+        self.value = kwargs.get('value', 0)
+
+    def output(self):
+        return self.value
+
     def __mod__(self, other):
-        pass
+        return Number(value=self.value % other.value)
 
     def __pow__(self, other):
-        pass
+        return Number(value=self.value ** other.value)
 
     def __lshift__(self, other):
         pass

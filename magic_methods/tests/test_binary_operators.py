@@ -1,4 +1,4 @@
-from ..binary_operators import NumberTuple as NT
+from ..binary_operators import NumberTuple as NT, Number as N
 
 
 def test_addition():
@@ -35,3 +35,21 @@ def test_floor_division():
     b = NT(4, 5, 6) // NT(2, 2, 1)
     assert isinstance(b, NT)
     assert b.output() == (2, 2, 6)
+
+
+def test_modulo():
+    a = N(value=7) % N(value=3)
+    assert isinstance(a, N)
+    assert a.output() == 1
+    b = N(value=20) % N(value=7)
+    assert isinstance(b, N)
+    assert b.output() == 6
+
+
+def test_power():
+    a = N(value=4) ** N(value=2)
+    assert isinstance(a, N)
+    assert a.output() == 16
+    b = N(value=4) ** N(value=0)
+    assert isinstance(b, N)
+    assert b.output() == 1
