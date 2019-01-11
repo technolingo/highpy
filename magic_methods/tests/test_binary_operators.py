@@ -53,3 +53,48 @@ def test_power():
     b = N(value=4) ** N(value=0)
     assert isinstance(b, N)
     assert b.output() == 1
+
+
+def test_left_shift():
+    a = N(value=10) << N(value=2)
+    assert isinstance(a, N)
+    assert a.output() == 40
+    b = N(value=10) << N(value=3)
+    assert isinstance(b, N)
+    assert b.output() == 80
+
+
+def test_right_shift():
+    a = N(value=10) >> N(value=2)
+    assert isinstance(a, N)
+    assert a.output() == 2
+    b = N(value=10) >> N(value=3)
+    assert isinstance(b, N)
+    assert b.output() == 1
+
+
+def test_bitwise_and():
+    a = N(value=12) & N(value=13)
+    assert isinstance(a, N)
+    assert a.output() == 12
+    b = N(value=5) & N(value=7)
+    assert isinstance(b, N)
+    assert b.output() == 5
+
+
+def test_bitwise_xor():
+    a = N(value=12) ^ N(value=13)
+    assert isinstance(a, N)
+    assert a.output() == 1
+    b = N(value=5) ^ N(value=7)
+    assert isinstance(b, N)
+    assert b.output() == 2
+
+
+def test_bitwise_or():
+    a = N(value=12) | N(value=13)
+    assert isinstance(a, N)
+    assert a.output() == 13
+    b = N(value=5) | N(value=7)
+    assert isinstance(b, N)
+    assert b.output() == 7

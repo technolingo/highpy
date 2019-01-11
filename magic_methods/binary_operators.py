@@ -44,16 +44,16 @@ class Number:
         return Number(value=self.value ** other.value)
 
     def __lshift__(self, other):
-        pass
+        return Number(value=self.value << other.value)
 
     def __rshift__(self, other):
-        pass
+        return Number(value=self.value >> other.value)
 
     def __and__(self, other):
-        pass
+        return Number(value=self.value & other.value)
 
     def __xor__(self, other):
-        pass
+        return Number(value=self.value ^ other.value)
 
     def __or__(self, other):
-        pass
+        return Number(value=self.value | other.value)
