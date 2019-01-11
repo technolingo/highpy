@@ -61,7 +61,8 @@ class DoublyLinkedList:
                 raise ValueError('Invalid index')
             new_node = Node(data, prev_node, prev_node.next)
             if prev_node.next is not None:
-                prev_node.prev = new_node
+                prev_node.next.prev = new_node
+            prev_node.next = new_node
 
     def insert_last(self, data):
         last = self.get_last()
@@ -78,12 +79,14 @@ class DoublyLinkedList:
         self.head = self.head.next
 
     def remove_at(self, index):
-        if index <= 0 or self.head is None:
+        if index < 0 or self.head is None:
+            return  # out of lower bound
+        elif index == 0:
             self.remove_first()
         else:
             prev_node = self.get_at(index - 1)
             if prev_node is None or prev_node.next is None:
-                raise ValueError('Invalid index')
+                return  # out of upper bound
 
             if prev_node.next.next is not None:
                 prev_node.next.next.prev = prev_node
