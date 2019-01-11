@@ -12,6 +12,7 @@ class DoublyLinkedList:
 
     def clear(self):
         self.head = None
+        self.tail = None
 
     def size(self):
         counter = 0
@@ -20,6 +21,12 @@ class DoublyLinkedList:
             counter += 1
             node = node.next
         return counter
+
+    def get_tail_index(self):
+        index = self.size() - 1
+        if index < 0:
+            return 0
+        return index
 
     def get_at(self, index):
         if index < 0 or not self.head:
@@ -34,20 +41,17 @@ class DoublyLinkedList:
         return None
 
     def get_first(self):
-        return self.get_at(0)
+        return self.head
 
     def get_last(self):
-        node = self.head
-        while node:
-            if node.next is None:
-                return node
-            node = node.next
-        return None
+        return self.tail
 
     def insert_first(self, data):
         new_node = Node(data, None, self.head)
         if self.head is not None:
             self.head.prev = new_node
+        if self.tail is None:
+            self.tail = new_node
         self.head = new_node
 
     def insert_at(self, index, data):
@@ -67,15 +71,17 @@ class DoublyLinkedList:
     def insert_last(self, data):
         last = self.get_last()
         if last is not None:
-            last.next = Node(data, last)
+            self.tail = last.next = Node(data, last)
         else:
-            self.head = Node(data)
+            self.head = self.tail = Node(data)
 
     def remove_first(self):
         if self.head is None:
             return
         if self.head.next is not None:
             self.head.next.prev = None
+        else:  # only 1 node in list
+            self.tail = None
         self.head = self.head.next
 
     def remove_at(self, index):
@@ -90,21 +96,20 @@ class DoublyLinkedList:
 
             if prev_node.next.next is not None:
                 prev_node.next.next.prev = prev_node
-
+            else:
+                self.tail = prev_node
             prev_node.next = prev_node.next.next
 
     def remove_last(self):
-        node = self.head
-        if node is None:
+        if self.head is None:
             return
-        elif node.next is None:
+        if self.head.next is None:
             self.head = None
-            return
-        while node:
-            if node.next.next is None:
-                node.next = None
-                return
-            node = node.next
+            self.tail = None
+        else:
+            if self.tail.prev.prev is not None:
+                self.tail.prev.prev.next = self.tail.prev
+            self.tail = self.tail.prev
 
     def every(self, func):
         ''' apply func to every node, return nothing'''
@@ -115,8 +120,9 @@ class DoublyLinkedList:
 
     def __repr__(self):
         head = self.head.data
+        tail = self.tail.data
         size = self.size()
-        return f'A LinkedList with head data {head} & length {size}.'
+        return f'A DoublyLinkedList with head data {head}, tail data {tail}, & length {size}.'
 
     def __len__(self):
         return self.size()
