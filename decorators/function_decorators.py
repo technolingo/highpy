@@ -9,6 +9,21 @@ def logger(func):
         output = func(*args, **kwargs)
         logging.info(f'Args {args} & kwards {kwargs} --> result: {output}')
         return output
+
+    return wrapper
+
+
+def memoize(func):
+    cache = {}
+
+    def wrapper(*args, **kwargs):
+        key = repr(args) + repr(kwargs)
+        output = cache.get(key)
+        if output is None:
+            output = func(*args, **kwargs)
+            cache[key] = output
+        return output
+
     return wrapper
 
 
@@ -17,4 +32,18 @@ def add_three(n):
     return 3 + n
 
 
-add_three(5)
+@memoize
+def fib(n):
+    ''' return the n-th fibonacci.'''
+    assert n >= 0
+    if n < 2:
+        return n
+    else:
+        return fib(n - 2) + fib(n - 1)
+
+
+# result = add_three(5)
+# print(result)
+
+for i in range(10):
+    print(fib(i))
