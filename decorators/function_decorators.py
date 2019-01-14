@@ -14,10 +14,12 @@ def logger(func):
 
 
 def memoize(func):
+    from collections import OrderedDict
     cache = {}
 
     def wrapper(*args, **kwargs):
-        key = repr(args) + repr(kwargs)
+        ordered_kwargs = OrderedDict(sorted(kwargs.items()))
+        key = repr(args) + repr(ordered_kwargs)
         output = cache.get(key)
         if output is None:
             output = func(*args, **kwargs)
