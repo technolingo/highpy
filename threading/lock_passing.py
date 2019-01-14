@@ -3,6 +3,8 @@ import threading as th
 
 class TicketOffice:
     l = th.Lock()
+    # Semaphore is a wrapper around Lock with some extra functionality
+    # l = th.Semaphore(verbose = True)
 
     def __init__(self, remaining):
         self.remaining = remaining
