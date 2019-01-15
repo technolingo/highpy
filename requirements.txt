@@ -2,5 +2,6 @@
 flake8
 autopep8
 mypy
+flake8-mypy
 pytest
 pytest-cov
