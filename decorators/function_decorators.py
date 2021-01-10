@@ -38,8 +38,7 @@ def fib(n):
     assert n >= 0
     if n < 2:
         return n
-    else:
-        return fib(n - 2) + fib(n - 1)
+    return fib(n - 2) + fib(n - 1)
 
 
 # result = add_three(5)
