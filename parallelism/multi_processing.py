@@ -2,14 +2,13 @@ import time
 import multiprocessing
 
 
-start = time.perf_counter()
-
-
 def slumber(secs):
     print('starting to slumber...')
     time.sleep(secs)
     print('done slumbering.')
 
+
+start = time.perf_counter()
 
 # slumber(1)
 # slumber(1)

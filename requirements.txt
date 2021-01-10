@@ -5,3 +5,5 @@ mypy
 flake8-mypy
 pytest
 pytest-cov
+
+joblib==1.0.0

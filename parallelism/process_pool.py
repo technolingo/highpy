@@ -2,14 +2,14 @@ import time
 from concurrent.futures import ProcessPoolExecutor, as_completed
 
 
-start = time.perf_counter()
-
-
 def slumber(secs):
     print('starting to slumber...')
     time.sleep(secs)
     print('done slumbering.')
     return f'slept for {secs} seconds'
+
+
+start = time.perf_counter()
 
 
 with ProcessPoolExecutor() as executor:  # auto joins processes
